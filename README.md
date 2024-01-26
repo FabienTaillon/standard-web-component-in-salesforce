@@ -1,18 +1,45 @@
-# Salesforce DX Project: Next Steps
+# Standard Web Components in Salesforce
+This a demo repo on how to use a Third-Party Web Component in Salesforce.  
+You can see how to bundle an existing Web Component for Salesforce here: https://github.com/FabienTaillon/bundle-standard-web-component-for-salesforce  
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+You can also have a look to another repository bundling components from other frameworks to standard web components: https://github.com/FabienTaillon/standard-web-components  
 
-## How Do You Plan to Deploy Your Changes?
+Current code is using an LWC Module to import the standard web component (see [here](./force-app/main/default/lwc/qrCode/qrCode.js)):
+```
+import 'c/qrCodeStandardWebComponent';
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+export default class QrCode extends LightningElement {
+    ...
+}
+```
 
-## Configure Your Salesforce DX Project
+Another option would be to import it from a Static Resource:
+```
+import { loadScript } from "lightning/platformResourceLoader";
+import qrCode from "@salesforce/resourceUrl/qrCode";``````
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+export default class QrCode extends LightningElement {
+    connectedCallback() {
+        loadScript(this, qrCode);
+    }
+}
+```
 
-## Read All About It
+One last option, if the web component export its HTMLElement and doesn't define the custom element itself, is to import and define it in your component:
+```
+import { PickerElement } from "c/emojiPicker";
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+export default class QrCode extends LightningElement {
+    connectedCallback() {
+        if (!customElements.get('emoji-picker')) { // if already defined, do nothing (e.g. same script imported twice)
+            customElements.define('emoji-picker', PickerElement)
+        }
+    }
+}
+```
+
+## Building the Scratch Org
+Creating the demo Scratch Org is pretty easy, you'll need:
+* to [setup your DevHub and install the CLI](https://trailhead.salesforce.com/fr/content/learn/modules/sfdx_app_dev/sfdx_app_dev_setup_dx) like for any work with Scratch Orgs
+* install [Texeï SFDX Plugin](https://github.com/texei/texei-sfdx-plugin): `sf plugins install texei-sfdx-plugin`
+* run the [createScratchOrg.sh](./createScratchOrg.sh) script

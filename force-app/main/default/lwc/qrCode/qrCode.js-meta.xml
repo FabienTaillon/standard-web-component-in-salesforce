@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>60.0</apiVersion>
+    <masterLabel>QR Code</masterLabel>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__AppPage,lightning__RecordPage,lightning__HomePage,lightning__FlowScreen">
+            <property name="value" label="Value" description="The QR code’s value." type="String" default="https://www.texei.com/blog" />
+            <property name="label" label="Label" description="The label for assistive devices to announce. If unspecified, the value will be used instead." type="String" default="QR Code" />
+            <property name="size" label="Size" description="The size of the QR code, in pixels." type="Integer" default="128" />
+            <property name="fill" label="Fill Color" description="The fill color. This can be any valid CSS color." type="String" default="#04314E" />
+            <property name="background" label="Background Color" description="The background color. This can be any valid CSS color or transparent." type="String" default="white" />
+            <property name="radius" label="Radius" description="The edge radius of each module. Must be between 0 and 0.5" type="Integer" default="0" />
+            <property name="errorCorrection" label="Error Correction" description="The level of error correction to use. Equivalent to 7 (L), 15 (M), 25 (Q), 30% (H)" type="String" datasource="L,M,Q,H" default="H" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,14 @@
+<template>
+  <lightning-card title="QR Code Generator">
+    <div class="slds-p-horizontal_small slds-grid slds-gutters">
+      <div class="slds-col slds-size_1-of-3">
+        <sl-qr-code lwc:external value={websiteUrl} label="website url" fill={color}></sl-qr-code>
+        <div class="slds-text-title_caps">{websiteUrl}</div>
+      </div>
+      <div class="slds-col slds-size_2-of-3">
+        <lightning-input type="url" label="Website Link" lwc:ref="inputUrl" value={websiteUrl} onchange={handleUrlChange}></lightning-input>
+        <lightning-input type="color" label="Color" value={color} onchange={handleColorChange}></lightning-input>
+      </div>
+    </div>
+  </lightning-card>
+</template>

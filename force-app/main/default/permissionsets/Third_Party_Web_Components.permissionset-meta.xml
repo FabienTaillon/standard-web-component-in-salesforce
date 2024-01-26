@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <applicationVisibilities>
+        <application>Third_Party_Web_Components</application>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Third-Party Web Components</label>
+    <tabSettings>
+        <tab>Third_Party_Web_Component</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+</PermissionSet>
