@@ -16,10 +16,10 @@ export default class QrCode extends LightningElement {
 Another option would be to import it from a Static Resource:
 ```
 import { loadScript } from "lightning/platformResourceLoader";
-import qrCode from "@salesforce/resourceUrl/qrCode";``````
+import qrCode from "@salesforce/resourceUrl/qrCode";    
 
 export default class QrCode extends LightningElement {
-    connectedCallback() {
+    renderedCallback() {
         loadScript(this, qrCode);
     }
 }
