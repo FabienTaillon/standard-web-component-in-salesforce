@@ -1,6 +1,7 @@
 {
   "orgName": "Texeï",
   "edition": "Developer",
+  "release": "preview",
   "features": ["EnableSetPasswordInApi"],
   "settings": {
     "lightningExperienceSettings": {
